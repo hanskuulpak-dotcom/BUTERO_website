@@ -1,0 +1,180 @@
+export type Language = 'et' | 'en';
+
+export const translations = {
+  et: {
+    nav: {
+      home: 'Avaleht',
+      product: 'Toode',
+      selection: 'Toote valik',
+      story: 'Meie lugu',
+      locations: 'Müügikohad',
+      contact: 'Kontakt',
+    },
+    hero: {
+      badge: 'Eesti käsitöö',
+      title: 'Puhas kuld',
+      subtitle: 'Eesti südamest',
+      description: 'Butero on austusavaldus traditsioonidele. Valmistatud väikestes kogustes, puhtast rõõsast koorest, pakkudes unustamatut maitseelamust igale toidule.',
+      cta: 'Tutvu tootega',
+    },
+    product: {
+      badge: 'Meie toode',
+      title: 'Mitte lihtsalt või, vaid maitseelamus',
+      desc1: 'Butero ei ole masstoodang. See on elav toode, mis valmib aeglaselt ja hoolikalt. Kasutame spetsiaalset fermenteerimisprotsessi, mis annab võile sügava, pähklise maitse ja siidise tekstuuri.',
+      desc2: 'Meie või sobib suurepäraselt nii hommikusele röstsaiale, gurmeeroogade valmistamiseks kui ka küpsetistesse, andes neile selle "õige" maitse.',
+      features: {
+        f1_title: '100% Eesti Koorevõi',
+        f1_desc: 'Valmistatud puhtast, kvaliteetsest ja rasvasest Eesti rõõsast koorest.',
+        f2_title: 'Käsitööna Valminud',
+        f2_desc: 'Iga võipakk on valminud meistrite hoolika pilgu ja käte all.',
+        f3_title: 'Ei Mingeid Lisaaineid',
+        f3_desc: 'Puhas maitse ilma säilitus-, värvi- ja maitseaineteta. Ainult loodus.',
+      },
+      selection_badge: 'Meie Valik',
+      selection_title: 'Viis väärt maitset',
+      variants: {
+        plain_name: 'Maitsestamata',
+        plain_desc: 'Klassikaline ja puhas.',
+        garlic_name: 'Küüslauguga',
+        garlic_desc: 'Aromaatne ja särtsakas.',
+        chili_name: 'Tšilliga',
+        chili_desc: 'Mõnusalt vürtsikas.',
+        seasalt_name: 'Meresoolaga',
+        seasalt_desc: 'Krõmpsuva soolaga.',
+        dill_name: 'Tilliga',
+        dill_desc: 'Suviselt värske.',
+      }
+    },
+    story: {
+      badge: 'Meie Lugu',
+      title: 'Kõik sai alguse vanaema köögist ja',
+      subtitle: 'igatsusest eheda maitse järele.',
+      p1: 'Aastaid tagasi, proovides leida poelettidelt võid, mis meenutaks lapsepõlve suvesid vanaema talus, pidime pettuma. Kõik maitses liiga tööstuslikult, liiga... tavaliselt.',
+      p2: 'Butero sündis soovist tuua tagasi lauale toit, millel on hing. Alustasime väikselt, katsetades erinevaid koore sorte ja valmistamismeetodeid, kuni leidsime selle täiusliku tasakaalu.',
+      p3: 'Täna oleme uhked, et saame pakkuda puhast Eesti toodangut, millesse on pandud kogu meie pere hool ja armastus. Me ei tee järeleandmisi kvaliteedis – kui see pole parim, siis see pole Butero.',
+      signature: '– Butero pere',
+    },
+    partners: {
+      badge: 'Koostööpartnerid',
+      title: 'Meie usaldusväärne võrgustik',
+      description: 'Butero käsitöövõi on saadaval tänu meie headele koostööpartneritele üle Eesti.',
+    },
+    locations: {
+      badge: 'Müügikohad',
+      title: 'Leia Butero enda lähedalt',
+      choose_area: 'Vali piirkond',
+      all: 'Kõik',
+      no_results: 'Selles piirkonnas müügikohad puuduvad.',
+      open_maps: 'Ava Google Mapsis',
+      loading: 'Kaardi laadimine...',
+    },
+    contact: {
+      title: 'Võta ühendust',
+      subtitle: 'Kas sul on küsimusi, koostöösoove või tahad lihtsalt kiita?',
+      follow_us: 'Jälgi meid sotsiaalmeedias',
+      success_title: 'Aitäh kirja eest!',
+      success_desc: 'Vastame Sulle esimesel võimalusel.',
+      form: {
+        name: 'Nimi',
+        name_ph: 'Sinu nimi',
+        email: 'E-post',
+        email_ph: 'sinu@epost.ee',
+        message: 'Sõnum',
+        message_ph: 'Kuidas saame aidata?',
+        submit: 'Saada sõnum',
+      }
+    },
+    footer: {
+      rights: 'Kõik õigused kaitstud.',
+      made_in: 'Valmistatud armastusega Eestis.',
+    }
+  },
+  en: {
+    nav: {
+      home: 'Home',
+      product: 'Product',
+      selection: 'Selection',
+      story: 'Our Story',
+      locations: 'Locations',
+      contact: 'Contact',
+    },
+    hero: {
+      badge: 'Estonian Handcraft',
+      title: 'Pure Gold',
+      subtitle: 'From the Heart of Estonia',
+      description: 'Butero is a tribute to traditions. Made in small batches from pure fresh cream, offering an unforgettable taste experience for every meal.',
+      cta: 'View Products',
+    },
+    product: {
+      badge: 'Our Product',
+      title: 'Not Just Butter, but a Taste Experience',
+      desc1: 'Butero is not mass production. It is a living product that matures slowly and carefully. We use a special fermentation process that gives the butter a deep, nutty flavor and silky texture.',
+      desc2: 'Our butter is perfect for morning toast, gourmet dishes, or baking, giving them that "right" taste.',
+      features: {
+        f1_title: '100% Estonian Cream Butter',
+        f1_desc: 'Made from pure, high-quality, and high-fat Estonian fresh cream.',
+        f2_title: 'Handcrafted',
+        f2_desc: 'Every butter packet is made under the careful eye and hands of masters.',
+        f3_title: 'No Additives',
+        f3_desc: 'Pure taste without preservatives, colors, or flavorings. Only nature.',
+      },
+      selection_badge: 'Our Selection',
+      selection_title: 'Five Precious Flavors',
+      variants: {
+        plain_name: 'Unsalted',
+        plain_desc: 'Classic and pure.',
+        garlic_name: 'Garlic',
+        garlic_desc: 'Aromatic and zesty.',
+        chili_name: 'Chili',
+        chili_desc: 'Pleasantly spicy.',
+        seasalt_name: 'Sea Salt',
+        seasalt_desc: 'With crunchy salt crystals.',
+        dill_name: 'Dill',
+        dill_desc: 'Summery fresh.',
+      }
+    },
+    story: {
+      badge: 'Our Story',
+      title: 'It all started in grandmother\'s kitchen and',
+      subtitle: 'a longing for authentic taste.',
+      p1: 'Years ago, trying to find butter on store shelves that would remind us of childhood summers at grandmother\'s farm, we were disappointed. Everything tasted too industrial, too... ordinary.',
+      p2: 'Butero was born from the desire to bring food with a soul back to the table. We started small, experimenting with different cream varieties and production methods until we found that perfect balance.',
+      p3: 'Today, we are proud to offer pure Estonian production, into which our entire family\'s care and love have been poured. We make no compromises on quality – if it\'s not the best, it\'s not Butero.',
+      signature: '– The Butero Family',
+    },
+    partners: {
+      badge: 'Partners',
+      title: 'Our Trusted Network',
+      description: 'Butero handmade butter is available thanks to our good partners all over Estonia.',
+    },
+    locations: {
+      badge: 'Locations',
+      title: 'Find Butero Near You',
+      choose_area: 'Choose Region',
+      all: 'All',
+      no_results: 'No locations found in this region.',
+      open_maps: 'Open in Google Maps',
+      loading: 'Loading map...',
+    },
+    contact: {
+      title: 'Contact Us',
+      subtitle: 'Do you have questions, cooperation requests, or just want to give praise?',
+      follow_us: 'Follow us on social media',
+      success_title: 'Thank you for your message!',
+      success_desc: 'We will reply to you as soon as possible.',
+      form: {
+        name: 'Name',
+        name_ph: 'Your name',
+        email: 'Email',
+        email_ph: 'your@email.com',
+        message: 'Message',
+        message_ph: 'How can we help?',
+        submit: 'Send Message',
+      }
+    },
+    footer: {
+      rights: 'All rights reserved.',
+      made_in: 'Made with love in Estonia.',
+    }
+  }
+};
