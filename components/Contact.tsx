@@ -49,7 +49,7 @@ const Contact: React.FC = () => {
              <div className="mt-12">
                 <p className="text-sm text-white/50">{t('contact.follow_us')}</p>
                 <div className="flex space-x-4 mt-4">
-                    <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-gold transition-colors">FB</a>
+                    <a href="https://www.facebook.com/butero/?locale=et_EE" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-gold transition-colors">FB</a>
                     <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-gold transition-colors">IG</a>
                 </div>
              </div>

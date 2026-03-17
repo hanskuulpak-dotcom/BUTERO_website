@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { LOCATIONS } from '../constants';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
-import { MapPin, Navigation, ChevronRight, Store } from 'lucide-react';
+import { MapPin, Navigation, ChevronRight, Store, Map as MapIcon, List, ChevronDown, ChevronUp } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 
 // Fix Leaflet's default icon path issues
@@ -49,13 +49,24 @@ const isValidLocation = (loc: any): boolean => {
 function MapHandler({ 
   locations, 
   selectedLocationId, 
-  markerRefs 
+  markerRefs,
+  activeTab
 }: { 
   locations: typeof LOCATIONS, 
   selectedLocationId: number | null,
-  markerRefs: React.MutableRefObject<{[key: number]: L.Marker | null}> 
+  markerRefs: React.MutableRefObject<{[key: number]: L.Marker | null}>,
+  activeTab?: string
 }) {
   const map = useMap();
+
+  // Handle map resize when switching tabs
+  useEffect(() => {
+    if (activeTab === 'map') {
+      setTimeout(() => {
+        map.invalidateSize();
+      }, 200);
+    }
+  }, [activeTab, map]);
 
   // Fit bounds when list changes (group filter change), but only if no specific location is selected
   useEffect(() => {
@@ -113,7 +124,11 @@ export default function StoreLocator() {
   const [isClient, setIsClient] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string>('All'); // Default to All
   const [selectedLocationId, setSelectedLocationId] = useState<number | null>(null);
+  const [activeTab, setActiveTab] = useState<'map' | 'list'>('map');
+  const [expandedGroups, setExpandedGroups] = useState<string[]>([]);
+  
   const markerRefs = useRef<{[key: number]: L.Marker | null}>({});
+  const itemRefs = useRef<{[key: number]: HTMLDivElement | null}>({});
 
   // Calculate unique groups for filters
   const groups = useMemo(() => {
@@ -127,42 +142,148 @@ export default function StoreLocator() {
     return LOCATIONS.filter(l => l.group === activeFilter);
   }, [activeFilter]);
 
+  // Group locations for list view
+  const groupedLocations = useMemo(() => {
+    const grouped: { [key: string]: typeof LOCATIONS } = {};
+    
+    // If a specific filter is active, we only show that group (or just list items)
+    // But to maintain the "Collapsible" structure, we can still group them.
+    const locsToGroup = filteredLocations;
+    
+    locsToGroup.forEach(loc => {
+      if (!grouped[loc.group]) grouped[loc.group] = [];
+      grouped[loc.group].push(loc);
+    });
+    
+    // Sort keys to ensure consistent order
+    return Object.keys(grouped).sort().reduce((acc, key) => {
+        acc[key] = grouped[key];
+        return acc;
+    }, {} as { [key: string]: typeof LOCATIONS });
+  }, [filteredLocations]);
+
   useEffect(() => {
     setIsClient(true);
   }, []);
 
   const handleLocationClick = (id: number) => {
       setSelectedLocationId(id);
-      // Scroll to map on mobile if needed? 
-      // For now, layout puts map side-by-side on desktop.
+      
+      // On mobile, switch to list view to show details/highlight
+      if (window.innerWidth < 768) {
+          setActiveTab('list');
+          
+          // Expand the group
+          const loc = LOCATIONS.find(l => l.id === id);
+          if (loc) {
+              setExpandedGroups(prev => prev.includes(loc.group) ? prev : [...prev, loc.group]);
+          }
+
+          // Scroll to item
+          setTimeout(() => {
+              const el = itemRefs.current[id];
+              if (el) {
+                  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+          }, 300);
+      }
+  };
+
+  const handleListLocationClick = (id: number) => {
+      setSelectedLocationId(id);
+      // On mobile, switch to map to show location
+      if (window.innerWidth < 768) {
+          setActiveTab('map');
+      }
   };
 
   const handleFilterChange = (group: string) => {
       setActiveFilter(group);
       setSelectedLocationId(null);
+      // If specific group selected, expand it
+      if (group !== 'All') {
+          setExpandedGroups([group]);
+      } else {
+          setExpandedGroups([]);
+      }
+  };
+
+  const toggleGroup = (group: string) => {
+      setExpandedGroups(prev => 
+          prev.includes(group) ? prev.filter(g => g !== group) : [...prev, group]
+      );
   };
 
   return (
-    <section id="locations" className="py-20 bg-brand-light relative scroll-mt-24">
+    <section id="locations" className="py-12 md:py-20 bg-brand-light relative scroll-mt-24">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-sm font-bold text-brand-gold tracking-widest uppercase mb-3">
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-xs md:text-sm font-bold text-brand-gold tracking-widest uppercase mb-2 md:mb-3">
             {t('locations.badge')}
           </h2>
-          <h3 className="font-serif text-4xl md:text-5xl text-brand-dark">
+          <h3 className="font-serif text-3xl md:text-5xl text-brand-dark">
             {t('locations.title')}
           </h3>
         </div>
 
+        {/* Mobile Controls (Sticky) */}
+        <div className="md:hidden sticky top-16 z-30 bg-brand-light pb-4 -mx-4 px-4 shadow-sm transition-all">
+            {/* Tabs */}
+            <div className="flex rounded-xl bg-white p-1 shadow-sm border border-gray-100 mb-3">
+                <button 
+                    onClick={() => setActiveTab('map')} 
+                    className={`flex-1 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all ${activeTab === 'map' ? 'bg-brand-brown text-white shadow-sm' : 'text-gray-500'}`}
+                >
+                    <MapIcon size={16} /> {t('locations.map') || 'Kaart'}
+                </button>
+                <button 
+                    onClick={() => setActiveTab('list')} 
+                    className={`flex-1 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all ${activeTab === 'list' ? 'bg-brand-brown text-white shadow-sm' : 'text-gray-500'}`}
+                >
+                    <List size={16} /> {t('locations.list') || 'Müügikohad'}
+                </button>
+            </div>
+
+            {/* Horizontal Filters */}
+            <div className="flex overflow-x-auto gap-2 pb-1 custom-scrollbar hide-scrollbar-mobile">
+                <button
+                    onClick={() => handleFilterChange('All')}
+                    className={`
+                        whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold tracking-wide transition-all duration-300 flex-shrink-0
+                        ${activeFilter === 'All' 
+                        ? 'bg-brand-brown text-white shadow-md' 
+                        : 'bg-white text-gray-500 border border-gray-200'}
+                    `}
+                >
+                    {t('locations.all')}
+                </button>
+                {groups.map((group) => (
+                    <button
+                        key={group}
+                        onClick={() => handleFilterChange(group)}
+                        className={`
+                            whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold tracking-wide transition-all duration-300 flex-shrink-0
+                            ${activeFilter === group 
+                            ? 'bg-brand-brown text-white shadow-md' 
+                            : 'bg-white text-gray-500 border border-gray-200'}
+                        `}
+                    >
+                        {group}
+                    </button>
+                ))}
+            </div>
+        </div>
+
         {/* Layout Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 h-auto lg:h-[700px]">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 h-auto md:h-[700px]">
             
-            {/* Left Panel: Filters & List */}
-            <div className="lg:col-span-4 flex flex-col h-full bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden order-2 lg:order-1">
-                {/* Header & Filter Pills */}
-                <div className="p-6 bg-brand-cream border-b border-brand-gold/10">
+            {/* Left Panel: List (Hidden on mobile if map active) */}
+            <div className={`md:col-span-4 flex flex-col h-full bg-white md:rounded-3xl md:shadow-xl md:border border-gray-100 overflow-hidden order-2 md:order-1 ${activeTab === 'map' ? 'hidden md:flex' : 'flex'}`}>
+                
+                {/* Desktop Header & Filter Pills (Hidden on mobile) */}
+                <div className="hidden md:block p-6 bg-brand-cream border-b border-brand-gold/10">
                     <h4 className="font-serif text-xl text-brand-dark mb-4">{t('locations.choose_area')}</h4>
                     <div className="flex flex-wrap gap-2">
                         {groups.map((group) => (
@@ -194,30 +315,56 @@ export default function StoreLocator() {
                 </div>
 
                 {/* Scrollable List */}
-                <div className="flex-1 overflow-y-auto p-2 space-y-2 custom-scrollbar">
-                    {filteredLocations.map((loc) => (
-                        <div 
-                            key={loc.id}
-                            onClick={() => handleLocationClick(loc.id)}
-                            className={`
-                                group p-4 rounded-xl cursor-pointer transition-all duration-300 border
-                                ${selectedLocationId === loc.id 
-                                    ? 'bg-brand-cream border-brand-gold shadow-md transform scale-[1.02]' 
-                                    : 'bg-white border-transparent hover:border-gray-200 hover:bg-gray-50'}
-                            `}
-                        >
-                            <div className="flex items-start justify-between">
-                                <div>
-                                    <h5 className={`font-serif text-lg font-bold mb-1 transition-colors ${selectedLocationId === loc.id ? 'text-brand-brown' : 'text-brand-dark'}`}>
-                                        {loc.name}
-                                    </h5>
-                                    <div className="flex items-center text-sm text-gray-500 mb-1">
-                                        <MapPin size={14} className="mr-1 text-brand-gold" />
-                                        {loc.address}, {loc.city}
-                                    </div>
+                <div className="flex-1 overflow-y-auto p-2 space-y-2 custom-scrollbar bg-white rounded-xl md:rounded-none shadow-sm md:shadow-none border md:border-none border-gray-100">
+                    {Object.entries(groupedLocations).map(([group, locs]) => (
+                        <div key={group} className="mb-2">
+                            {/* Group Header (Collapsible) */}
+                            <button 
+                                onClick={() => toggleGroup(group)}
+                                className="w-full flex items-center justify-between p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors mb-1"
+                            >
+                                <span className="font-bold text-brand-dark text-sm">{group}</span>
+                                <div className="text-gray-400">
+                                    {expandedGroups.includes(group) || activeFilter !== 'All' ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                                 </div>
-                                <div className={`mt-2 text-brand-gold transition-transform duration-300 ${selectedLocationId === loc.id ? 'translate-x-1' : 'opacity-0 group-hover:opacity-100'}`}>
-                                    <ChevronRight size={20} />
+                            </button>
+
+                            {/* Items */}
+                            <div className={`transition-all duration-300 overflow-hidden ${expandedGroups.includes(group) || activeFilter !== 'All' ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                                <div className="space-y-2 pl-1 pt-1">
+                                    {locs.map((loc) => (
+                                        <div 
+                                            key={loc.id}
+                                            ref={(el) => { itemRefs.current[loc.id] = el; }}
+                                            onClick={() => handleListLocationClick(loc.id)}
+                                            className={`
+                                                group p-3 rounded-lg cursor-pointer transition-all duration-300 border relative
+                                                ${selectedLocationId === loc.id 
+                                                    ? 'bg-brand-cream border-brand-gold shadow-md' 
+                                                    : 'bg-white border-gray-100 hover:border-gray-200 hover:bg-gray-50'}
+                                            `}
+                                        >
+                                            <div className="flex items-start justify-between">
+                                                <div>
+                                                    <h5 className={`font-serif text-base font-bold mb-0.5 transition-colors ${selectedLocationId === loc.id ? 'text-brand-brown' : 'text-brand-dark'}`}>
+                                                        {loc.name}
+                                                    </h5>
+                                                    <div className="flex items-center text-xs text-gray-500 mb-2">
+                                                        <MapPin size={12} className="mr-1 text-brand-gold" />
+                                                        {loc.address}
+                                                    </div>
+                                                    
+                                                    {/* Small "Open on Map" button for mobile list view */}
+                                                    <button className="text-[10px] font-bold uppercase tracking-wider text-brand-gold flex items-center gap-1 hover:text-brand-brown transition-colors">
+                                                        <MapIcon size={10} /> {t('locations.open_maps') || 'Ava kaardil'}
+                                                    </button>
+                                                </div>
+                                                <div className={`mt-2 text-brand-gold transition-transform duration-300 ${selectedLocationId === loc.id ? 'translate-x-1' : 'opacity-0 group-hover:opacity-100'}`}>
+                                                    <ChevronRight size={16} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
@@ -231,8 +378,8 @@ export default function StoreLocator() {
                 </div>
             </div>
 
-            {/* Right Panel: Map */}
-            <div className="lg:col-span-8 h-[500px] lg:h-full rounded-3xl overflow-hidden shadow-2xl border-4 border-white order-1 lg:order-2 relative">
+            {/* Right Panel: Map (Hidden on mobile if list active) */}
+            <div className={`md:col-span-8 h-[50vh] md:h-full rounded-3xl overflow-hidden shadow-lg md:shadow-2xl border-4 border-white order-1 md:order-2 relative ${activeTab === 'list' ? 'hidden md:block' : 'block'}`}>
                {isClient ? (
                  <MapContainer 
                     center={[58.8, 25.5]} 
@@ -300,6 +447,7 @@ export default function StoreLocator() {
                         locations={filteredLocations} 
                         selectedLocationId={selectedLocationId}
                         markerRefs={markerRefs}
+                        activeTab={activeTab}
                     />
                  </MapContainer>
                ) : (
@@ -333,6 +481,7 @@ export default function StoreLocator() {
         /* Custom Scrollbar for list */
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
+            height: 6px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
             background: #f1f1f1;
@@ -345,6 +494,14 @@ export default function StoreLocator() {
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #5D4037; 
+        }
+        
+        .hide-scrollbar-mobile::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar-mobile {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
       `}</style>
     </section>

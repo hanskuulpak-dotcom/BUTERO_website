@@ -66,17 +66,17 @@ const Navbar: React.FC = () => {
 
   // Navbar visual state
   const navClasses = isOpen 
-    ? 'bg-transparent py-6 border-transparent' 
+    ? 'bg-transparent py-4 border-transparent' 
     : scrolled 
       ? 'bg-white/95 backdrop-blur-md shadow-sm py-3 border-gray-100' 
-      : 'bg-transparent py-6 border-transparent';
+      : 'bg-transparent py-4 border-transparent';
 
   return (
     <nav 
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b ${navClasses}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-24">
+        <div className="flex items-center justify-between">
           
           {/* Logo - Left */}
           <div className="flex-shrink-0 flex items-center z-50 relative">
@@ -88,7 +88,7 @@ const Navbar: React.FC = () => {
               <img 
                 src="https://www.upload.ee/image/19026566/butero_logo_canvas.png" 
                 alt="Butero" 
-                className="h-20 w-auto" 
+                className="h-[36px] md:h-[44px] lg:h-[52px] w-auto object-contain max-w-full" 
               />
             </a>
           </div>
@@ -157,12 +157,12 @@ const Navbar: React.FC = () => {
         <div className="flex flex-col w-full h-full overflow-y-auto bg-white">
             
             {/* Header Spacer in Overlay */}
-            <div className="flex items-center justify-between px-4 sm:px-6 min-h-[144px] flex-shrink-0"> 
+            <div className="flex items-center justify-between px-4 sm:px-6 py-4 flex-shrink-0"> 
                <a href="#hero" onClick={(e) => handleNavClick(e, '#hero')}>
                  <img 
                    src="https://www.upload.ee/image/19026566/butero_logo_canvas.png" 
                    alt="Butero" 
-                   className="h-20 w-auto" 
+                   className="h-[36px] md:h-[44px] lg:h-[52px] w-auto object-contain max-w-full" 
                  />
                </a>
                {/* Spacer for the X button (which is in the fixed nav) */}

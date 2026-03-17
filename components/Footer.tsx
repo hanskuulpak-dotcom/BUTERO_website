@@ -13,6 +13,9 @@ const Footer: React.FC = () => {
                 <a href="#product" className="hover:text-white transition-colors">{t('nav.product')}</a>
                 <a href="#story" className="hover:text-white transition-colors">{t('nav.story')}</a>
             </div>
+            <div className="flex justify-center space-x-4 mb-8">
+                <a href="https://www.facebook.com/butero/?locale=et_EE" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">Facebook</a>
+            </div>
             <p>&copy; {new Date().getFullYear()} Butero OÜ. {t('footer.rights')}</p>
             <p className="mt-2 text-xs">{t('footer.made_in')}</p>
         </div>

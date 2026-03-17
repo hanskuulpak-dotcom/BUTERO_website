@@ -61,40 +61,63 @@ export const PRODUCT_VARIANTS: ProductVariant[] = [
 ];
 
 export const LOCATIONS: Location[] = [
-  // MUHU PAGARID
+  // MUHU LEIB
   {
     id: 101,
-    name: "Muhu Pagarid (Liiva)",
-    city: "Muhu",
-    address: "Liiva küla, Muhu saar",
-    group: "Saaremaa",
+    name: "Muhu Leib (Baltijaama Turg)",
+    city: "Tallinn",
+    address: "Kopli 1",
+    group: "Tallinn",
     link: "https://muhuleib.ee",
-    googleMapsLink: "https://maps.app.goo.gl/FdvY4iaowqJu1oam7",
-    lat: 58.6053,
-    lng: 23.2356
+    googleMapsLink: "https://maps.app.goo.gl/PVzpqnpy14SsyFdf6",
+    lat: 59.4412932,
+    lng: 24.7336404
   },
   {
     id: 102,
-    name: "Muhu Pagarid (Tartu Lõunakeskus)",
+    name: "Muhu Leib (Mustamäe Keskus)",
+    city: "Tallinn",
+    address: "A. H. Tammsaare tee 104a",
+    group: "Tallinn",
+    link: "https://muhuleib.ee",
+    googleMapsLink: "https://maps.app.goo.gl/5NpsqcpVgx9aNeFj7",
+    lat: 59.4085418,
+    lng: 24.6889043
+  },
+  {
+    id: 103,
+    name: "Muhu Leib (Tartu Lõunakeskus)",
     city: "Tartu",
-    address: "Lääneringtee 39",
+    address: "Ringtee 75",
     group: "Tartu",
     link: "https://muhuleib.ee",
     googleMapsLink: "https://maps.app.goo.gl/j9eXafMJsAHSQR1x8",
-    lat: 58.3575,
-    lng: 26.6806
+    lat: 58.3581916,
+    lng: 26.6784294
+  },
+  // MUHU PAGARID
+  {
+    id: 104,
+    name: "Muhu Pagarid",
+    city: "Muhu",
+    address: "Liiva küla, Muhu vald",
+    group: "Saaremaa",
+    link: "https://muhuleib.ee",
+    googleMapsLink: "https://maps.app.goo.gl/FdvY4iaowqJu1oam7",
+    lat: 58.6058949,
+    lng: 23.2341322
   },
   // TALUTURG
   {
     id: 201,
     name: "Taluturg (Tartu Lõunakeskus)",
     city: "Tartu",
-    address: "Lääneringtee 39",
+    address: "Ringtee 75",
     group: "Tartu",
     link: "https://taluturg.ee",
     googleMapsLink: "https://maps.app.goo.gl/QJGZCwUtEabNm24r9",
-    lat: 58.3575,
-    lng: 26.6806
+    lat: 58.3580586,
+    lng: 26.6785693
   },
   {
     id: 202,
@@ -104,31 +127,31 @@ export const LOCATIONS: Location[] = [
     group: "Pärnu",
     link: "https://taluturg.ee",
     googleMapsLink: "https://maps.app.goo.gl/pozNVLNorN2gpFGr9",
-    lat: 58.3852,
-    lng: 24.5028
+    lat: 58.386931,
+    lng: 24.5019971
   },
   {
     id: 203,
-    name: "Taluturg (Solaris)",
+    name: "Taluturg (Solarise Keskus)",
     city: "Tallinn",
     address: "Estonia pst 9",
     group: "Tallinn",
     link: "https://taluturg.ee",
     googleMapsLink: "https://maps.app.goo.gl/WRKfohpE28WmW9kw8",
-    lat: 59.4330,
-    lng: 24.7520
+    lat: 59.4332115,
+    lng: 24.7513744
   },
-  // KAUBAMAJA
+  // KAUBAMAJA TOIDUMAAILM
   {
     id: 301,
-    name: "Kaubamaja Toidumaailm",
+    name: "Tallinna Kaubamaja Toidumaailm",
     city: "Tallinn",
     address: "Gonsiori 2",
     group: "Tallinn",
     link: "https://www.kaubamaja.ee",
     googleMapsLink: "https://maps.app.goo.gl/jhknL5ZPL1pMub1K8",
-    lat: 59.4349,
-    lng: 24.7576
+    lat: 59.4365146,
+    lng: 24.7559338
   },
   {
     id: 302,
@@ -138,20 +161,20 @@ export const LOCATIONS: Location[] = [
     group: "Tartu",
     link: "https://tartukaubamaja.ee",
     googleMapsLink: "https://maps.app.goo.gl/6hmXXPKRdy3vHnoS8",
-    lat: 58.3776,
-    lng: 26.7290
+    lat: 58.378169,
+    lng: 26.7280593
   },
-  // BUXHÖWDEN
+  // BUXHÖWDEN PAGAR
   {
     id: 401,
     name: "Buxhöwden Pagar (Nõmme Turg)",
     city: "Tallinn",
-    address: "Turu plats 5",
+    address: "Turu plats 8",
     group: "Tallinn",
     link: "https://buxhowden.ee",
     googleMapsLink: "https://maps.app.goo.gl/R2cz7vu13XZ5rZyY9",
-    lat: 59.3875,
-    lng: 24.6853
+    lat: 59.3891656,
+    lng: 24.6849026
   },
   {
     id: 402,
@@ -161,8 +184,8 @@ export const LOCATIONS: Location[] = [
     group: "Harjumaa",
     link: "https://buxhowden.ee",
     googleMapsLink: "https://maps.app.goo.gl/kRbMrVAnNGFgy2BU9",
-    lat: 59.3204,
-    lng: 24.5555
+    lat: 59.322484,
+    lng: 24.5589589
   },
   {
     id: 403,
@@ -172,20 +195,20 @@ export const LOCATIONS: Location[] = [
     group: "Harjumaa",
     link: "https://buxhowden.ee",
     googleMapsLink: "https://maps.app.goo.gl/HHW5HXv3FmABjf6V6",
-    lat: 59.5036,
-    lng: 24.8315
+    lat: 59.4955512,
+    lng: 24.8269404
   },
   // NOP
   {
     id: 501,
-    name: "Kohvik NOP",
+    name: "NOP",
     city: "Tallinn",
     address: "J. Köleri 1",
     group: "Tallinn",
     link: "https://nop.ee",
     googleMapsLink: "https://maps.app.goo.gl/TPto9cm5hV4WC6er6",
-    lat: 59.4373,
-    lng: 24.7788
+    lat: 59.4383508,
+    lng: 24.7763943
   },
   // HANSA GURMEE
   {
@@ -196,8 +219,8 @@ export const LOCATIONS: Location[] = [
     group: "Harjumaa",
     link: "#",
     googleMapsLink: "https://maps.app.goo.gl/MMdQY38SxhPjDHEN6",
-    lat: 59.4286,
-    lng: 24.5458
+    lat: 59.4295361,
+    lng: 24.5533084
   },
   // VIIMSI LIHAPOOD
   {
@@ -208,44 +231,44 @@ export const LOCATIONS: Location[] = [
     group: "Harjumaa",
     link: "#",
     googleMapsLink: "https://maps.app.goo.gl/MdFMA9qcQrR6TEMA7",
-    lat: 59.5015,
-    lng: 24.8340
+    lat: 59.5157314,
+    lng: 24.815488
   },
   // SÖÖ JA SÄRA
   {
     id: 801,
     name: "Söö ja Sära",
     city: "Tallinn",
-    address: "Turu plats 5",
+    address: "Pärnu mnt 238",
     group: "Tallinn",
     link: "#",
-    googleMapsLink: "https://maps.app.goo.gl/R2cz7vu13XZ5rZyY9",
-    lat: 59.3875,
-    lng: 24.6853
+    googleMapsLink: "https://maps.app.goo.gl/iYtEUe9E8nKTANev9",
+    lat: 59.3889747,
+    lng: 24.6845042
   },
   // STOCKMANN
   {
     id: 901,
-    name: "Stockmann Delikatess",
+    name: "Stockmann",
     city: "Tallinn",
     address: "Liivalaia 53",
     group: "Tallinn",
     link: "https://www.stockmann.ee",
     googleMapsLink: "https://maps.app.goo.gl/gWmvcCkV181tdXED8",
-    lat: 59.4304,
-    lng: 24.7587
+    lat: 59.4326439,
+    lng: 24.7621936
   },
-  // LENNUJAAM
+  // TALLINNA LENNUJAAM
   {
     id: 1001,
-    name: "Tallinna Lennujaam (Hää Eesti Asi)",
+    name: "Hää Eesti Asi",
     city: "Tallinn",
     address: "Tartu mnt 101",
     group: "Tallinn",
     link: "https://tallinn-airport.ee",
     googleMapsLink: "https://maps.app.goo.gl/dJyVSZmZMwBJXx9PA",
-    lat: 59.4164,
-    lng: 24.7986
+    lat: 59.4158139,
+    lng: 24.7993875
   },
   // SELVER
   {
@@ -256,8 +279,8 @@ export const LOCATIONS: Location[] = [
     group: "Tallinn",
     link: "https://www.selver.ee",
     googleMapsLink: "https://maps.app.goo.gl/iMZWNGTYmukf1mzR7",
-    lat: 59.4627,
-    lng: 24.8258
+    lat: 59.4626967,
+    lng: 24.8271864
   },
   {
     id: 1102,
@@ -267,8 +290,8 @@ export const LOCATIONS: Location[] = [
     group: "Harjumaa",
     link: "https://www.selver.ee",
     googleMapsLink: "https://maps.app.goo.gl/cUv8ePChJm9nuqJJA",
-    lat: 59.5012,
-    lng: 24.8236
+    lat: 59.5046741,
+    lng: 24.8270454
   },
   {
     id: 1103,
@@ -278,8 +301,8 @@ export const LOCATIONS: Location[] = [
     group: "Tallinn",
     link: "https://www.selver.ee",
     googleMapsLink: "https://maps.app.goo.gl/i2yfp8hndaWy6evc8",
-    lat: 59.4353,
-    lng: 24.8579
+    lat: 59.4377513,
+    lng: 24.8703613
   },
   {
     id: 1104,
@@ -289,8 +312,8 @@ export const LOCATIONS: Location[] = [
     group: "Tallinn",
     link: "https://www.selver.ee",
     googleMapsLink: "https://maps.app.goo.gl/qg536NExbRkZ2yrH9",
-    lat: 59.4278,
-    lng: 24.7770
+    lat: 59.4323966,
+    lng: 24.7800334
   },
   {
     id: 1105,
@@ -300,8 +323,8 @@ export const LOCATIONS: Location[] = [
     group: "Harjumaa",
     link: "https://www.selver.ee",
     googleMapsLink: "https://maps.app.goo.gl/it9Hmhydjh2kGNjNA",
-    lat: 59.4005,
-    lng: 24.8093
+    lat: 59.4024238,
+    lng: 24.8114336
   },
   {
     id: 1106,
@@ -311,8 +334,8 @@ export const LOCATIONS: Location[] = [
     group: "Tallinn",
     link: "https://www.selver.ee",
     googleMapsLink: "https://maps.app.goo.gl/6HiC1u5rSHk9nUm26",
-    lat: 59.3934,
-    lng: 24.7176
+    lat: 59.3927652,
+    lng: 24.7205076
   },
   {
     id: 1107,
@@ -322,8 +345,8 @@ export const LOCATIONS: Location[] = [
     group: "Tallinn",
     link: "https://www.selver.ee",
     googleMapsLink: "https://maps.app.goo.gl/FVCRmjsGYL4hVFHE6",
-    lat: 59.4087,
-    lng: 24.6601
+    lat: 59.4122596,
+    lng: 24.6666599
   },
   {
     id: 1108,
@@ -333,20 +356,20 @@ export const LOCATIONS: Location[] = [
     group: "Harjumaa",
     link: "https://www.selver.ee",
     googleMapsLink: "https://maps.app.goo.gl/NNUd1qoZ33Thju4e7",
-    lat: 59.3087,
-    lng: 24.4284
+    lat: 59.3133282,
+    lng: 24.4219019
   },
-  // DELICE
+  // SELVER DELICE
   {
     id: 1201,
-    name: "Viimsi Delice",
+    name: "Viimsi Selver Delice",
     city: "Viimsi",
     address: "Randvere tee 6",
     group: "Harjumaa",
     link: "https://www.delice.ee",
     googleMapsLink: "https://maps.app.goo.gl/tL8znhwRgr2vQjcUA",
-    lat: 59.5036,
-    lng: 24.8315
+    lat: 59.5061738,
+    lng: 24.8307583
   },
   {
     id: 1202,
@@ -356,8 +379,64 @@ export const LOCATIONS: Location[] = [
     group: "Tallinn",
     link: "https://www.delice.ee",
     googleMapsLink: "https://maps.app.goo.gl/kS6R7P6rndmRoTsY9",
-    lat: 59.4330,
-    lng: 24.7520
+    lat: 59.4329739,
+    lng: 24.7514736
+  },
+  // PRISMA
+  {
+    id: 1301,
+    name: "Lasnamäe Prisma",
+    city: "Tallinn",
+    address: "Mustakivi tee 17",
+    group: "Tallinn",
+    link: "https://www.prismamarket.ee",
+    googleMapsLink: "https://maps.app.goo.gl/btKGMC9yvGHNRKLY6",
+    lat: 59.4431692,
+    lng: 24.8632934
+  },
+  {
+    id: 1302,
+    name: "Sikupilli Prisma",
+    city: "Tallinn",
+    address: "Tartu mnt 87",
+    group: "Tallinn",
+    link: "https://www.prismamarket.ee",
+    googleMapsLink: "https://maps.app.goo.gl/TnU8LE5GpPYHJ5NC8",
+    lat: 59.4264328,
+    lng: 24.7836173
+  },
+  {
+    id: 1303,
+    name: "Kristiine Prisma",
+    city: "Tallinn",
+    address: "Endla 45",
+    group: "Tallinn",
+    link: "https://www.prismamarket.ee",
+    googleMapsLink: "https://maps.app.goo.gl/H8wpxzECddWWiXYy5",
+    lat: 59.4270174,
+    lng: 24.7228422
+  },
+  {
+    id: 1304,
+    name: "Mustamäe Prisma",
+    city: "Tallinn",
+    address: "A. H. Tammsaare tee 116",
+    group: "Tallinn",
+    link: "https://www.prismamarket.ee",
+    googleMapsLink: "https://maps.app.goo.gl/XGqEE4YmVZW5R8PU6",
+    lat: 59.4102831,
+    lng: 24.6813508
+  },
+  {
+    id: 1305,
+    name: "Rocca Al Mare Prisma",
+    city: "Tallinn",
+    address: "Paldiski mnt 102",
+    group: "Tallinn",
+    link: "https://www.prismamarket.ee",
+    googleMapsLink: "https://maps.app.goo.gl/nk184K674mPKGVf46",
+    lat: 59.426524,
+    lng: 24.6521751
   }
 ];
 
