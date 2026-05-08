@@ -139,6 +139,7 @@ export default function StoreLocator() {
   // Filter locations
   const filteredLocations = useMemo(() => {
     if (activeFilter === 'All') return LOCATIONS;
+    if (activeFilter === 'Harjumaa') return LOCATIONS.filter(l => l.group === 'Harjumaa' || l.group === 'Tallinn');
     return LOCATIONS.filter(l => l.group === activeFilter);
   }, [activeFilter]);
 
@@ -202,7 +203,11 @@ export default function StoreLocator() {
       setSelectedLocationId(null);
       // If specific group selected, expand it
       if (group !== 'All') {
-          setExpandedGroups([group]);
+          if (group === 'Harjumaa') {
+              setExpandedGroups(['Harjumaa', 'Tallinn']);
+          } else {
+              setExpandedGroups([group]);
+          }
       } else {
           setExpandedGroups([]);
       }
